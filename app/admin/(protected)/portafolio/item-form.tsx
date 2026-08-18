@@ -1,3 +1,5 @@
+import { CoverImagePicker } from "@/components/cover-image-picker";
+
 type ItemFormValues = {
   bookTitle: string;
   authorName: string;
@@ -56,20 +58,12 @@ export function ItemForm({
           className="rounded-md border border-ink/20 px-4 py-2"
         />
       </label>
-      <label className="flex flex-col gap-1">
-        <span className="text-sm font-semibold">Portada (imagen)</span>
-        <input type="file" name="cover" accept="image/*" />
-        {initialValues?.coverImageUrl && (
-          <span className="text-xs text-muted">
-            Ya tiene portada — sube una nueva solo si quieres reemplazarla.
-          </span>
-        )}
-        <input
-          type="hidden"
-          name="existingCoverUrl"
-          defaultValue={initialValues?.coverImageUrl ?? ""}
-        />
-      </label>
+      <CoverImagePicker name="cover" existingUrl={initialValues?.coverImageUrl} />
+      <input
+        type="hidden"
+        name="existingCoverUrl"
+        defaultValue={initialValues?.coverImageUrl ?? ""}
+      />
       <label className="flex items-center gap-2">
         <input
           type="checkbox"

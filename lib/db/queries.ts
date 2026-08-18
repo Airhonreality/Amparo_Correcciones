@@ -72,3 +72,18 @@ export async function getAllPortfolioItemsAdmin() {
   const { db } = await import("./index");
   return db.select().from(portfolioItems).orderBy(desc(portfolioItems.createdAt));
 }
+
+export async function getAllTestimonialsAdmin() {
+  const { db } = await import("./index");
+  return db.select().from(testimonials).orderBy(desc(testimonials.createdAt));
+}
+
+export async function getPortfolioItemsForSelect() {
+  return safe(async () => {
+    const { db } = await import("./index");
+    return db
+      .select({ id: portfolioItems.id, bookTitle: portfolioItems.bookTitle })
+      .from(portfolioItems)
+      .orderBy(desc(portfolioItems.createdAt));
+  }, []);
+}

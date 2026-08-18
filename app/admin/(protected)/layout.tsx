@@ -32,6 +32,7 @@ export default async function ProtectedAdminLayout({
             <Link href="/admin">Panel</Link>
             <Link href="/admin/blog">Blog</Link>
             <Link href="/admin/portafolio">Portafolio</Link>
+            <Link href="/admin/testimonios">Testimonios</Link>
           </nav>
           <form action={logoutAction}>
             <button type="submit" className="text-sm text-muted underline">
