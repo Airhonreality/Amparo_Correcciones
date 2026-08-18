@@ -1,69 +1,99 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Container, Band } from "@/components/container";
+import { WhatsAppButton } from "@/components/whatsapp-button";
+import { getFeaturedTestimonial } from "@/lib/db/queries";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const testimonial = await getFeaturedTestimonial();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <>
+      <Band tone="cream" className="py-20">
+        <Container className="flex flex-col items-center gap-6 text-center">
+          <h1 className="font-display text-4xl italic text-ink sm:text-5xl">
+            Su texto está en buenas manos.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+          <p className="max-w-xl text-lg text-muted">
+            Corrección de estilo para novelas, memorias, crónicas y libros de
+            crecimiento personal — hecha a mano, palabra por palabra, por una
+            escritora y periodista. Sin inteligencia artificial.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <WhatsAppButton message="Hola Amparo, quiero información sobre corrección de estilo.">
+              Escríbeme por WhatsApp
+            </WhatsAppButton>
+            <Link
+              href="/portafolio"
+              className="inline-flex h-12 items-center justify-center rounded-md border-2 border-anchor px-6 font-semibold text-anchor transition-colors hover:bg-anchor hover:text-cream"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              Ver portafolio de libros corregidos
+            </Link>
+          </div>
+        </Container>
+      </Band>
+
+      <Container className="mx-auto flex max-w-[800px] flex-col gap-6 py-16">
+        <p className="text-lg leading-relaxed">
+          La corrección de estilo dota a tu manuscrito de claridad, precisión,
+          expresividad y el tono adecuado, para que la lectura sea fluida,
+          armónica y entretenida — y tus lectores disfruten cada página.
+        </p>
+        <div>
+          <p className="font-display text-xl font-bold uppercase tracking-wide">
+            Amparo Rozo
+          </p>
+          <p className="text-muted">
+            Comunicadora social y periodista (Universidad Externado de
+            Colombia), correctora profesional de estilo y escritora. Autora de
+            dos novelas publicadas por editorial.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <p>
+          Reviso tu manuscrito palabra por palabra: sintaxis, ortotipografía,
+          coherencia narrativa y mucho más.{" "}
+          <Link href="/correccion-de-estilo" className="font-semibold text-teal underline">
+            Ver todo lo que incluye →
+          </Link>
+        </p>
+      </Container>
+
+      {testimonial && (
+        <Band tone="bg-alt" className="py-16">
+          <Container>
+            <blockquote className="rounded-lg bg-blue-pastel p-8 font-display italic text-ink">
+              <p className="text-lg">&ldquo;{testimonial.quote}&rdquo;</p>
+              <footer className="mt-4 not-italic font-sans text-sm text-muted">
+                — {testimonial.clientName}, autor de {testimonial.bookTitle}
+              </footer>
+            </blockquote>
+          </Container>
+        </Band>
+      )}
+
+      <Container className="flex flex-col gap-4 py-16">
+        <h2 className="font-display text-2xl italic">Como escritora</h2>
+        <p>
+          Además de corregir, escribo. Soy autora de{" "}
+          <em>Marcianos hijos de p...</em> (Grupo Editorial Ibáñez, 2025) y{" "}
+          <em>Juro por mis orejas</em> (Editorial Oveja Negra, 2016).{" "}
+          <Link href="/escritora" className="font-semibold text-teal underline">
+            Conoce mis novelas →
+          </Link>
+        </p>
+      </Container>
+
+      <Band tone="cream" className="py-16">
+        <Container className="flex flex-col items-center gap-4 text-center">
+          <h2 className="font-display text-2xl italic">
+            ¿Tienes un manuscrito listo para publicar?
+          </h2>
+          <WhatsAppButton message="Hola Amparo, quiero información sobre corrección de estilo.">
+            Escríbeme por WhatsApp
+          </WhatsAppButton>
+        </Container>
+      </Band>
+    </>
   );
 }
