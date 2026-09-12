@@ -6,7 +6,12 @@ export const blogPosts = pgTable("blog_posts", {
   title: text("title").notNull(),
   excerpt: text("excerpt").notNull(),
   body: text("body").notNull(),
+  coverImageUrl: text("cover_image_url"),
+  category: text("category"),
+  featured: boolean("featured").notNull().default(false),
+  publishedAt: timestamp("published_at"),
   published: boolean("published").notNull().default(true),
+  preferenceOrder: integer("preference_order").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -33,4 +38,20 @@ export const testimonials = pgTable("testimonials", {
     onDelete: "set null",
   }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const authorBooks = pgTable("author_books", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  subtitle: text("subtitle"),
+  editorialNote: text("editorial_note"),
+  description: text("description").notNull(),
+  coverImageUrl: text("cover_image_url"),
+  purchaseLink: text("purchase_link"),
+  purchasePlatform: text("purchase_platform"),
+  publisherLogos: text("publisher_logos"),
+  preferenceOrder: integer("preference_order").notNull().default(0),
+  published: boolean("published").notNull().default(true),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

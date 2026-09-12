@@ -52,12 +52,12 @@ export function Nav() {
     <>
       {/* DESKTOP NAVBAR */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 hidden md:block transition-transform duration-300 bg-cream/90 backdrop-blur-md ${
+        className={`fixed top-0 left-0 right-0 z-50 hidden md:block transition-transform duration-300 bg-white/95 backdrop-blur-md ${
           isHidden ? "-translate-y-full" : "translate-y-0"
         } ${isScrolled ? "shadow-sm border-b border-ink/5" : ""}`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="font-display group">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 h-20">
+          <Link href="/" className="font-display group flex flex-col justify-center bg-cream px-6 h-full -ml-6 transition-colors hover:bg-cream-soft">
             <span className="block text-xs font-bold uppercase tracking-widest text-ink transition-colors group-hover:text-terracotta">
               {siteInfo.tagline}
             </span>
@@ -85,7 +85,7 @@ export function Nav() {
               href={whatsappHref("Hola Amparo, me gustaría consultar por tus servicios de corrección de estilo.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-4 rounded-full bg-ink px-6 py-2 text-sm not-italic text-cream transition-transform hover:scale-105 active:scale-95"
+              className="ml-4 rounded-full bg-coral px-6 py-2 text-sm font-semibold not-italic text-ink shadow-sm transition-transform hover:scale-105 hover:bg-coral/90 active:scale-95"
             >
               Contactar
             </a>

@@ -13,6 +13,15 @@ export default function AdminDashboardPage() {
           <p className="text-sm text-muted">Crear y editar artículos del blog.</p>
         </Link>
         <Link
+          href="/admin/libros"
+          className="rounded-lg bg-cream p-6 hover:bg-cream-soft"
+        >
+          <p className="font-display text-xl">Mis Libros</p>
+          <p className="text-sm text-muted">
+            Gestionar tus libros como autora (portada, sinopsis, compra).
+          </p>
+        </Link>
+        <Link
           href="/admin/portafolio"
           className="rounded-lg bg-cream p-6 hover:bg-cream-soft"
         >

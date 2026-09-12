@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Container, Band } from "@/components/container";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "¿Cuánto cuesta corregir un libro?",
   description:
     "Tarifa de corrección de estilo: $23 COP por palabra, sin paquetes cerrados ni cotizadores automáticos.",
-};
+  path: "/cuanto-cuesta-corregir-un-libro",
+});
 
 const ejemplos = [
   { extension: "Cuento corto (10.000 palabras)", precio: "$230.000 COP" },

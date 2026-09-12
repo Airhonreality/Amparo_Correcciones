@@ -30,6 +30,7 @@ export default async function ProtectedAdminLayout({
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <nav className="flex gap-5 font-display italic">
             <Link href="/admin">Panel</Link>
+            <Link href="/admin/libros">Libros</Link>
             <Link href="/admin/blog">Blog</Link>
             <Link href="/admin/portafolio">Portafolio</Link>
             <Link href="/admin/testimonios">Testimonios</Link>

@@ -1,6 +1,6 @@
 import "server-only";
-import { eq, desc } from "drizzle-orm";
-import { blogPosts, portfolioItems, testimonials } from "./schema";
+import { eq, desc, sql } from "drizzle-orm";
+import { blogPosts, portfolioItems, testimonials, authorBooks } from "./schema";
 
 /**
  * Las consultas públicas atrapan errores de conexión (p. ej. DATABASE_URL sin
@@ -22,7 +22,12 @@ export async function getPublishedBlogPosts() {
       .select()
       .from(blogPosts)
       .where(eq(blogPosts.published, true))
-      .orderBy(desc(blogPosts.createdAt));
+      .orderBy(
+        desc(blogPosts.featured),
+        desc(blogPosts.preferenceOrder),
+        sql`${blogPosts.publishedAt} DESC NULLS LAST`,
+        desc(blogPosts.createdAt)
+      );
   }, []);
 }
 
@@ -61,11 +66,32 @@ export async function getFeaturedTestimonial() {
   }, null);
 }
 
+export async function getAllTestimonials() {
+  return safe(async () => {
+    const { db } = await import("./index");
+    return db
+      .select()
+      .from(testimonials)
+      .orderBy(desc(testimonials.createdAt));
+  }, []);
+}
+
+export async function getPublishedAuthorBooks() {
+  return safe(async () => {
+    const { db } = await import("./index");
+    return db
+      .select()
+      .from(authorBooks)
+      .where(eq(authorBooks.published, true))
+      .orderBy(desc(authorBooks.preferenceOrder), desc(authorBooks.createdAt));
+  }, []);
+}
+
 // --- Consultas de administración (sin fallback: si fallan, el admin debe verlo) ---
 
 export async function getAllBlogPostsAdmin() {
   const { db } = await import("./index");
-  return db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+  return db.select().from(blogPosts).orderBy(desc(blogPosts.preferenceOrder), desc(blogPosts.createdAt));
 }
 
 export async function getAllPortfolioItemsAdmin() {
@@ -76,6 +102,11 @@ export async function getAllPortfolioItemsAdmin() {
 export async function getAllTestimonialsAdmin() {
   const { db } = await import("./index");
   return db.select().from(testimonials).orderBy(desc(testimonials.createdAt));
+}
+
+export async function getAllAuthorBooksAdmin() {
+  const { db } = await import("./index");
+  return db.select().from(authorBooks).orderBy(desc(authorBooks.preferenceOrder), desc(authorBooks.createdAt));
 }
 
 export async function getPortfolioItemsForSelect() {
