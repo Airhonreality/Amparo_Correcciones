@@ -22,7 +22,7 @@ const images: CarouselImage[] = [
   },
 ];
 
-const SLIDE_DURATION = 3.6;
+const SLIDE_DURATION = 6;
 
 export function EventsCarousel() {
   return (
